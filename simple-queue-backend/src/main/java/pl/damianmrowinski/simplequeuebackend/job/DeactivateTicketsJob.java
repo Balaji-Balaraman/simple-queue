@@ -7,13 +7,13 @@ import pl.damianmrowinski.simplequeuebackend.app.service.ticket.TicketService;
 
 @Component
 @RequiredArgsConstructor
-public class DeactivateTicketJob {
+public class DeactivateTicketsJob {
 
     private final TicketService ticketService;
 
-    @Scheduled(fixedRate = 20000)
-    public void refreshTicketsTable() {
-        ticketService.deactivateTicket();
+    @Scheduled(fixedRate = 20_000)
+    public void deactivateFirstTicket() {
+        ticketService.deactivateFirstTicket();
     }
 
 }

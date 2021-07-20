@@ -1,12 +1,12 @@
 package pl.damianmrowinski.simplequeuebackend.dto.ticket;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor

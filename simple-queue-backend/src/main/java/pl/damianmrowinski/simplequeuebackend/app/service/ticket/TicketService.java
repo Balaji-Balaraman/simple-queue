@@ -1,9 +1,5 @@
 package pl.damianmrowinski.simplequeuebackend.app.service.ticket;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,15 +11,21 @@ import pl.damianmrowinski.simplequeuebackend.domain.repository.ticket.TicketRepo
 import pl.damianmrowinski.simplequeuebackend.dto.ticket.CreateTicketDto;
 import pl.damianmrowinski.simplequeuebackend.dto.ticket.TicketDto;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class TicketService {
 
     private static final Long VIP = 2L;
     private static final Long EMERGENCY = 3L;
+
     private final TicketRepository ticketRepository;
     private final CreateTicketDtoToTicketEntityConverter createTicketDtoToTicketEntityConverter;
     private final TicketEntityToTicketDtoConverter ticketEntityToTicketDtoConverter;
+
     @Value("${pin.vip}")
     private String vipPin;
     @Value("${pin.emergency}")
@@ -51,8 +53,8 @@ public class TicketService {
     }
 
     @Transactional
-    public void deactivateTicket() {
-        ticketRepository.deactivateTicket();
+    public void deactivateFirstTicket() {
+        ticketRepository.deactivateFirstTicket();
     }
 
 }

@@ -1,10 +1,10 @@
 package pl.damianmrowinski.simplequeuebackend.dto.ticket;
 
-import java.time.LocalDateTime;
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Getter
 @RequiredArgsConstructor

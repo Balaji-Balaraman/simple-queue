@@ -1,7 +1,5 @@
 package pl.damianmrowinski.simplequeuebackend.rest.controller;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.damianmrowinski.simplequeuebackend.app.service.ticket.TicketService;
 import pl.damianmrowinski.simplequeuebackend.dto.ticket.CreateTicketDto;
 import pl.damianmrowinski.simplequeuebackend.dto.ticket.TicketDto;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/tickets")

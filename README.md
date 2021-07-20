@@ -33,31 +33,39 @@ Take your place in the queue
 Backend:
 
 ```
- # 1. Run the script that starts the PostgreSQL database via Docker Compose 
+1. Build the project using Maven Wrapper
+ 
+# Linux / MacOS
+./mvnw clean install
+
+# On Windows
+mvnw.cmd clean install
+
+# 2. Run the script that starts the PostgreSQL database via Docker Compose 
 
 cd docker/dependencies
 
- # Linux / MacOS
+# Linux / MacOS
 ./start.sh
 
- # On Windows
+# On Windows
 start.sh
 
- # 2. Run class SimpleQueueApplication
+# 3. Run class SimpleQueueApplication
 ```
 
 Frontend:
 
 ```
- # 1. Download all frontend dependencies by command
+# 1. Download all frontend dependencies by running command
 
 npm install
 
- # 2. Run frontend application 
+# 2. Run frontend application 
 
 npm start
 
- # 3. Navigate to http://localhost:4200/
+# 3. Navigate to http://localhost:4200/
 ```
 
 ---------------------------------------------
