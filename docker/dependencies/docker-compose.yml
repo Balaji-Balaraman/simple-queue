@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: simple_queue_db
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: simple-queue
+      POSTGRES_USER: simple-queue-user
+      POSTGRES_PASSWORD: xa35!ZxX(@A
+    restart: unless-stopped
+    ports:
+      - 5432:5432

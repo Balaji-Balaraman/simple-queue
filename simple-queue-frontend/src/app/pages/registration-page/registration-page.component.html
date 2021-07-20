@@ -1,0 +1,52 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <form (ngSubmit)="saveTicket()"
+            [formGroup]="checkoutFormGroup"
+            class="form"
+            novalidate>
+        <h4 class="form-label">Select role</h4>
+        <div class="form-check form-check-inline">
+          <input (change)="onPriorityChange()" class="form-check-input" formControlName="priority" id="normalUser" type="radio" value="1">
+          <label class="form-check-label" for="normalUser">Normal user</label>
+        </div>
+        <div class="form-check form-check-inline pt-3">
+          <input (change)="onPriorityChange()" class="form-check-input" formControlName="priority" id="vip" type="radio" value="2">
+          <label class="form-check-label" for="vip">VIP</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input (change)="onPriorityChange()" class="form-check-input" formControlName="priority" id="emergency" type="radio" value="3">
+          <label class="form-check-label" for="emergency">Emergency</label>
+        </div>
+        <div class="col-md-4 offset-4 pt-3">
+          <label class="form-label username-field" for="username">Username</label>
+          <input aria-describedby="name" class="form-control custom-label" formControlName="username" id="username" type="text">
+        </div>
+        <div [collapse]="isCollapsed" class="g-3 align-items-center" id="collapseBasic">
+          <div class="col-md-4 offset-4">
+            <label class="col-form-label" for="pin">Type secret code</label>
+          </div>
+          <div class="col-md-4 offset-4">
+            <input aria-describedby="pin" class="form-control custom-label" formControlName="pin" id="pin" type="password">
+          </div>
+          <div class="col-auto">
+           <span class="form-text text-white" id="passwordHelpInline">Must be 4 characters long.</span>
+          </div>
+        </div>
+        <button class="btn btn-lg btn-secondary fw-bold border-white bg-dark mt-5" type="submit">GET TICKET</button>
+      </form>
+    </div>
+  </div>
+
+  <ng-template #modal>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Success</h4>
+      <button type="button" class="close pull-right" aria-label="Close" routerLink="/monitoring" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Find your name in the table and check your position in the queue.
+    </div>
+  </ng-template>
+</div>

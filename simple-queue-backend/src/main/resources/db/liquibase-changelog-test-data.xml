@@ -1,0 +1,15 @@
+<databaseChangeLog
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+	<changeSet id="ticket-test-data" author="dmrowinski" context="test-data" runOnChange="true">
+		<loadUpdateData file="data/test/ticket.csv"
+						primaryKey="id"
+						tableName="ticket"
+						relativeToChangelogFile="true"
+						separator=";">
+		</loadUpdateData>
+	</changeSet>
+
+</databaseChangeLog>
