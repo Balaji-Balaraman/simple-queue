@@ -52,11 +52,18 @@
 		</dependency>
 
 		<!--Lombok-->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
-		</dependency>
+		</dependency> -->
+		<dependency>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>1.18.26</version> <!-- Ensure the latest compatible version -->
+                        <scope>provided</scope> <!-- Optional, to indicate it's only needed at compile time -->
+                </dependency>
+
 
 		<!--Test-->
 		<dependency>
