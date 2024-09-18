@@ -9,6 +9,7 @@
 		<groupId>pl.damianmrowinski</groupId>
 		<artifactId>simple-queue</artifactId>
 		<version>1.0-SNAPSHOT</version>
+		<packaging>jar</packaging>
 	</parent>
 
 	<artifactId>simple-queue-backend</artifactId>
