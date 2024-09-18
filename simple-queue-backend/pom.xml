@@ -9,13 +9,14 @@
 		<groupId>pl.damianmrowinski</groupId>
 		<artifactId>simple-queue</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<packaging>jar</packaging>
+		
 	</parent>
 
 	<artifactId>simple-queue-backend</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>simple queue - backend</name>
 	<description>simple-queue</description>
+	<packaging>jar</packaging>
 
 	<properties>
 		<java.version>11</java.version>
