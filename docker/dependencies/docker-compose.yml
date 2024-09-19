@@ -72,7 +72,7 @@ services:
       SPRING_DATASOURCE_USERNAME: simple-queue-user
       SPRING_DATASOURCE_PASSWORD: xa35!ZxX(@A
     ports:
-      - "8085:8080"
+      - "8088:8080"
     networks:
       - dependencies_app-network  # Match the existing network name
 
