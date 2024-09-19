@@ -46,6 +46,8 @@
 #   app-network:
 #     driver: bridge
 
+version: '3.8'
+
 services:
   db:
     container_name: simple_queue_db
