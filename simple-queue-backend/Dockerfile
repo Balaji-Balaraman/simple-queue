@@ -1,5 +1,6 @@
 #FROM openjdk:11-jdk-alpine
-FROM openjdk:11-jdk
+#FROM openjdk:11-jdk
+FROM eclipse-temurin:17-jdk-alpine
 VOLUME /tmp
 ARG JAVA_OPTS
 ENV JAVA_OPTS=$JAVA_OPTS
