@@ -60,7 +60,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - app-network
+      - dependencies_app-network  # Match the existing network name
 
   java-backend:
     container_name: java_backend
@@ -74,4 +74,8 @@ services:
     ports:
       - "8085:8080"
     networks:
-      - app-network
+      - dependencies_app-network  # Match the existing network name
+
+networks:
+  dependencies_app-network:
+    external: true
