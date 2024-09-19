@@ -12,7 +12,39 @@
 #     ports:
 #       - 5432:5432
 
-version: '3.8'
+# version: '3.8'
+
+# services:
+#   db:
+#     container_name: simple_queue_db
+#     image: postgres:13.3
+#     environment:
+#       POSTGRES_DB: simple-queue
+#       POSTGRES_USER: simple-queue-user
+#       POSTGRES_PASSWORD: xa35!ZxX(@A
+#     restart: unless-stopped
+#     ports:
+#       - "5432:5432"
+#     networks:
+#       - app-network
+
+#   java-backend:
+#     container_name: java_backend
+#     image: acr02demo.azurecr.io/java-backend:latest
+#     depends_on:
+#       - db
+#     environment:
+#       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simple-queue
+#       SPRING_DATASOURCE_USERNAME: simple-queue-user
+#       SPRING_DATASOURCE_PASSWORD: xa35!ZxX(@A
+#     ports:
+#       - "8085:8080"
+#     networks:
+#       - app-network
+
+# networks:
+#   app-network:
+#     driver: bridge
 
 services:
   db:
@@ -41,8 +73,3 @@ services:
       - "8085:8080"
     networks:
       - app-network
-
-networks:
-  app-network:
-    driver: bridge
-
