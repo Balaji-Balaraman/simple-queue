@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: simple-queue
+      POSTGRES_USER: simple-queue-user
+      POSTGRES_PASSWORD: xa35!ZxX(@A
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == worker
+
+  java-backend:
+    image: acr02demo.azurecr.io/java-backend:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simple-queue
+      SPRING_DATASOURCE_USERNAME: simple-queue-user
+      SPRING_DATASOURCE_PASSWORD: xa35!ZxX(@A
+    ports:
+      - "8085:8080"
+    networks:
+      - app-network
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+networks:
+  app-network:
+    driver: overlay
+
+volumes:
+  db-data:
