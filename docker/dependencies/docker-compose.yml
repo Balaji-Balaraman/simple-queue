@@ -38,7 +38,7 @@ services:
       SPRING_DATASOURCE_USERNAME: simple-queue-user
       SPRING_DATASOURCE_PASSWORD: xa35!ZxX(@A
     ports:
-      - "8080:8080"
+      - "8085:8080"
     networks:
       - app-network
 
