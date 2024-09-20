@@ -106,7 +106,7 @@
             <plugin>
                 <groupId>com.github.wvengen</groupId>
                 <artifactId>proguard-maven-plugin</artifactId>
-                <version>2.6.2</version> <!-- Updated version -->
+                <version>${proguard-maven-plugin.version}</version> <!-- Updated version -->
                 <executions>
                     <execution>
                         <goals>
