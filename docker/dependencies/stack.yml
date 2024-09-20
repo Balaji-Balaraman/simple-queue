@@ -22,7 +22,8 @@ services:
   java-backend:
     image: acr02demo.azurecr.io/java-backend:latest
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simple-queue
+      # SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simple-queue
+      SPRING_DATASOURCE_URL: jdbc:postgresql://172.203.238.72:5432/simple-queue
       SPRING_DATASOURCE_USERNAME: simple-queue-user
       SPRING_DATASOURCE_PASSWORD: xa35!ZxX(@A
     ports:
