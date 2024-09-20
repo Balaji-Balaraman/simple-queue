@@ -1,43 +1,88 @@
+# version: '3.8'
+
+# services:
+#   db:
+#     image: postgres:13.3
+#     environment:
+#       POSTGRES_DB: simple-queue
+#       POSTGRES_USER: simple-queue-user
+#       POSTGRES_PASSWORD: xa35!ZxX(@A
+#     ports:
+#       - "5432:5432"
+#     networks:
+#       - app-network
+#     volumes:
+#       - db-data:/var/lib/postgresql/data
+#     deploy:
+#       replicas: 1
+#       placement:
+#         constraints:
+#           - node.role == worker
+
+#   java-backend:
+#     image: acr02demo.azurecr.io/java-backend:latest
+#     environment:
+#       # SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simple-queue
+#       SPRING_DATASOURCE_URL: jdbc:postgresql://172.203.238.72:5432/simple-queue
+#       SPRING_DATASOURCE_USERNAME: simple-queue-user
+#       SPRING_DATASOURCE_PASSWORD: xa35!ZxX(@A
+#     ports:
+#       - "8085:8080"
+#     networks:
+#       - app-network
+#     deploy:
+#       replicas: 2
+#       restart_policy:
+#         condition: on-failure
+
+# networks:
+#   app-network:
+#     driver: overlay
+
+# volumes:
+#   db-data:
+
+
 version: '3.8'
 
 services:
   db:
     image: postgres:13.3
     environment:
-      POSTGRES_DB: simple-queue
       POSTGRES_USER: simple-queue-user
       POSTGRES_PASSWORD: xa35!ZxX(@A
-    ports:
-      - "5432:5432"
-    networks:
-      - app-network
+      POSTGRES_DB: simple-queue
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - backend-network
     deploy:
-      replicas: 1
+      mode: replicated
+      replicas: 2        # Deploy 2 replicas across master and worker
       placement:
-        constraints:
-          - node.role == worker
+        max_replicas_per_node: 1  # Ensures distribution across nodes
+    ports:
+      - 5432:5432
 
   java-backend:
     image: acr02demo.azurecr.io/java-backend:latest
     environment:
-      # SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simple-queue
-      SPRING_DATASOURCE_URL: jdbc:postgresql://172.203.238.72:5432/simple-queue
-      SPRING_DATASOURCE_USERNAME: simple-queue-user
-      SPRING_DATASOURCE_PASSWORD: xa35!ZxX(@A
-    ports:
-      - "8085:8080"
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/simple-queue
+      - SPRING_DATASOURCE_USERNAME=simple-queue-user
+      - SPRING_DATASOURCE_PASSWORD=xa35!ZxX(@A
     networks:
-      - app-network
+      - backend-network
     deploy:
-      replicas: 2
-      restart_policy:
-        condition: on-failure
-
-networks:
-  app-network:
-    driver: overlay
+      mode: replicated
+      replicas: 2        # Deploy 2 replicas of the Java backend across master and worker
+      placement:
+        max_replicas_per_node: 1  # Ensures distribution across nodes
+    ports:
+      - 8085:8080
 
 volumes:
-  db-data:
+  db-data:               # Volume for persistent database storage
+
+networks:
+  backend-network:
+    driver: overlay       # Overlay network for communication across nodes
