@@ -101,7 +101,26 @@
                     <mainClass>${exec.mainClass}</mainClass>
                 </configuration>
             </plugin>
+
+            <!-- ProGuard Maven Plugin for Obfuscation -->
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.3.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <options>
+                        <option>-keep public class com.example.queue.SimpleQueueApplication { public static void main(java.lang.String[]); }</option>
+                        <!-- You can add more keep options as per your requirements -->
+                    </options>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
