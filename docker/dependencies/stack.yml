@@ -87,3 +87,28 @@ volumes:
 networks:
   backend-network:
     driver: overlay       # Overlay network for communication across nodes
+    
+    # Angular Frontend Service
+  angular-frontend:
+    image: acr02demo.azurecr.io/angular-frontend:latest  # Replace with your actual image name and tag
+    environment:
+      - NODE_ENV=production
+    networks:
+      - backend-network  # If needed to communicate with the backend
+      - frontend-network
+    deploy:
+      mode: replicated
+      replicas: 2
+      placement:
+        max_replicas_per_node: 1
+    ports:
+      - 8085:8085  # Frontend exposed on port 8085
+
+volumes:
+  db-data:  # Volume for persistent database storage
+
+networks:
+  backend-network:
+    driver: overlay
+  frontend-network:
+    driver: overlay
