@@ -118,7 +118,7 @@
                     <options>
                         <option>-keep public class com.example.queue.SimpleQueueApplication { public static void main(java.lang.String[]); }</option>
                         <option>-keep class * { *; }</option>
-                        <!-- You can add more keep options as per your requirements 
+                         You can add more keep options as per your requirements 
                     </options>
                 </configuration>
             </plugin> -->
