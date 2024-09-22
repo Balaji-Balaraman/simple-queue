@@ -48,7 +48,7 @@ services:
       placement:
         max_replicas_per_node: 1
     ports:
-      - 8085:8085  # Frontend exposed on port 8085
+      - 4200:4200  # Frontend exposed on port 8085
 
 volumes:
   db-data:  # Volume for persistent database storage
