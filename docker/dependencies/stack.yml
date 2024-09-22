@@ -95,7 +95,7 @@ networks:
       - NODE_ENV=production
     networks:
       - backend-network  # If needed to communicate with the backend
-   #   - frontend-network
+      - frontend-network
     deploy:
       mode: replicated
       replicas: 2
@@ -110,5 +110,5 @@ volumes:
 networks:
   backend-network:
     driver: overlay
-#  frontend-network:
- #   driver: overlay
+  frontend-network:
+    driver: overlay
