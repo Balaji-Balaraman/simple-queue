@@ -56,7 +56,7 @@ RUN npm install --production --silent && npm cache clean --force
 COPY . .
 
 # Expose the application port
-EXPOSE 8085
+EXPOSE 4200
 
 # Change ownership of the app directory
 RUN chown -R node /usr/src/app
