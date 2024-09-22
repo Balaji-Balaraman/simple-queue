@@ -40,10 +40,9 @@
 # USER node
 # CMD ["npm", "start"]
 #####################################################################################################
-FROM node:16-alpine
+FROM node:14-alpine
 
-# Set environment variable for Node.js options
-ENV NODE_OPTIONS=--openssl-legacy-provider
+# Set environment variable for Node.js environment
 ENV NODE_ENV=production
 
 # Set the working directory
@@ -51,7 +50,7 @@ WORKDIR /usr/src/app
 
 # Copy package files and install dependencies
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install --production --silent && npm cache clean --force && mv node_modules ../
+RUN npm install --production --silent && npm cache clean --force
 
 # Copy the rest of the application files
 COPY . .
