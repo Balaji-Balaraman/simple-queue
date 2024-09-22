@@ -1,48 +1,3 @@
-# version: '3.8'
-
-# services:
-#   db:
-#     image: postgres:13.3
-#     environment:
-#       POSTGRES_DB: simple-queue
-#       POSTGRES_USER: simple-queue-user
-#       POSTGRES_PASSWORD: xa35!ZxX(@A
-#     ports:
-#       - "5432:5432"
-#     networks:
-#       - app-network
-#     volumes:
-#       - db-data:/var/lib/postgresql/data
-#     deploy:
-#       replicas: 1
-#       placement:
-#         constraints:
-#           - node.role == worker
-
-#   java-backend:
-#     image: acr02demo.azurecr.io/java-backend:latest
-#     environment:
-#       # SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simple-queue
-#       SPRING_DATASOURCE_URL: jdbc:postgresql://172.203.238.72:5432/simple-queue
-#       SPRING_DATASOURCE_USERNAME: simple-queue-user
-#       SPRING_DATASOURCE_PASSWORD: xa35!ZxX(@A
-#     ports:
-#       - "8085:8080"
-#     networks:
-#       - app-network
-#     deploy:
-#       replicas: 2
-#       restart_policy:
-#         condition: on-failure
-
-# networks:
-#   app-network:
-#     driver: overlay
-
-# volumes:
-#   db-data:
-
-
 version: '3.8'
 
 services:
@@ -79,23 +34,14 @@ services:
         max_replicas_per_node: 1  # Ensures distribution across nodes
     ports:
       - 8088:8088
-  #    - 8085:8080
 
-volumes:
-  db-data:               # Volume for persistent database storage
-
-networks:
-  backend-network:
-    driver: overlay       # Overlay network for communication across nodes
-    
-    # Angular Frontend Service
   angular-frontend:
     image: acr02demo.azurecr.io/angular-frontend:latest  # Replace with your actual image name and tag
     environment:
       - NODE_ENV=production
     networks:
       - backend-network  # If needed to communicate with the backend
-      - frontend-network
+    #  - frontend-network
     deploy:
       mode: replicated
       replicas: 2
