@@ -40,13 +40,30 @@
 # USER node
 # CMD ["npm", "start"]
 #####################################################################################################
-FROM node:18-alpine
+FROM node:16-alpine
+
+# Set environment variable for Node.js options
+ENV NODE_OPTIONS=--openssl-legacy-provider
 ENV NODE_ENV=production
+
+# Set the working directory
 WORKDIR /usr/src/app
+
+# Copy package files and install dependencies
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN npm install --production --silent && npm cache clean --force && mv node_modules ../
+
+# Copy the rest of the application files
 COPY . .
+
+# Expose the application port
 EXPOSE 8085
+
+# Change ownership of the app directory
 RUN chown -R node /usr/src/app
+
+# Switch to the node user
 USER node
+
+# Start the application
 CMD ["npm", "start"]
