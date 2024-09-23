@@ -33,7 +33,7 @@ services:
       placement:
         max_replicas_per_node: 1  # Ensures distribution across nodes
     ports:
-      - 8088:8080
+      - 8088:8088
 
   angular-frontend:
     image: acr02demo.azurecr.io/angular-frontend:latest  # Replace with your actual image name and tag
