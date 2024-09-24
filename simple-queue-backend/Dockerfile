@@ -6,7 +6,7 @@ VOLUME /tmp
 ARG JAVA_OPTS
 ENV JAVA_OPTS=$JAVA_OPTS
 COPY target/simple-queue-backend-1.0-SNAPSHOT.jar simplequeuebackend.jar
-#EXPOSE 8088
+EXPOSE 8088
 ENTRYPOINT exec java $JAVA_OPTS -jar simplequeuebackend.jar
 
 # Build stage
