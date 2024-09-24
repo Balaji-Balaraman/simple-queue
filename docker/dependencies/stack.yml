@@ -13,7 +13,7 @@ services:
       - backend-network
     deploy:
       mode: replicated
-      replicas: 2        # Deploy 2 replicas across master and worker
+      replicas: 1        # Deploy 2 replicas across master and worker
       placement:
         max_replicas_per_node: 1  # Ensures distribution across nodes
     ports:
@@ -29,7 +29,7 @@ services:
       - backend-network
     deploy:
       mode: replicated
-      replicas: 2        # Deploy 2 replicas of the Java backend across master and worker
+      replicas: 1        # Deploy 2 replicas of the Java backend across master and worker
       placement:
         max_replicas_per_node: 1  # Ensures distribution across nodes
     ports:
@@ -44,7 +44,7 @@ services:
     #  - frontend-network
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
       placement:
         max_replicas_per_node: 1
     ports:
