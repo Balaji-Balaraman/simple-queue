@@ -17,6 +17,11 @@ services:
       placement:
         constraints:
           - node.role == worker  # Ensure deployment only on worker node
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
     ports:
       - 5432:5432
 
@@ -36,6 +41,9 @@ services:
           - node.role == worker  # Ensure deployment only on worker node
       restart_policy:
         condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
     logging:
       driver: "json-file"
       options:
@@ -56,6 +64,11 @@ services:
       placement:
         constraints:
           - node.role == worker  # Ensure deployment only on worker node
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
     ports:
       - 4200:4200  # Frontend exposed on port 4200
 
