@@ -4,39 +4,62 @@ services:
   db:
     image: postgres:13.3
     environment:
-      POSTGRES_DB: simple-queue
       POSTGRES_USER: simple-queue-user
       POSTGRES_PASSWORD: xa35!ZxX(@A
-    ports:
-      - "5432:5432"
-    networks:
-      - app-network
+      POSTGRES_DB: simple-queue
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - backend-network
     deploy:
-      replicas: 1
+      mode: replicated
+      replicas: 2
       placement:
         constraints:
-          - node.role == worker
+          - node.role == worker  # Ensure deployment only on worker node
+        # max_replicas_per_node: 1  # Distribute replicas across worker nodes
+    ports:
+      - 5432:5432
 
   java-backend:
     image: acr02demo.azurecr.io/java-backend:latest
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/simple-queue
-      SPRING_DATASOURCE_USERNAME: simple-queue-user
-      SPRING_DATASOURCE_PASSWORD: xa35!ZxX(@A
-    ports:
-      - "8085:8080"
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/simple-queue
+      - SPRING_DATASOURCE_USERNAME=simple-queue-user
+      - SPRING_DATASOURCE_PASSWORD=xa35!ZxX(@A
     networks:
-      - app-network
+      - backend-network
     deploy:
+      mode: replicated
       replicas: 2
-      restart_policy:
-        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker  # Ensure deployment only on worker node
+        # max_replicas_per_node: 1  # Distribute replicas across worker nodes
+    ports:
+      - 8088:8080
 
-networks:
-  app-network:
-    driver: overlay
+  angular-frontend:
+    image: acr02demo.azurecr.io/angular-frontend:latest
+    environment:
+      - NODE_ENV=production
+    networks:
+      - backend-network
+    deploy:
+      mode: replicated
+      replicas: 2
+      placement:
+        constraints:
+          - node.role == worker  # Ensure deployment only on worker node
+        # max_replicas_per_node: 1
+    ports:
+      - 4200:4200  # Frontend exposed on port 8085
 
 volumes:
   db-data:
+
+networks:
+  backend-network:
+    driver: overlay
+  frontend-network:
+    driver: overlay
