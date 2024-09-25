@@ -36,11 +36,11 @@ services:
           - node.role == worker  # Ensure deployment only on worker node
       restart_policy:
         condition: on-failure
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "10m"
-          max-file: "3"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     ports:
       - 8088:8080
 
@@ -64,4 +64,6 @@ volumes:
 
 networks:
   backend-network:
+    driver: overlay
+  frontend-network:
     driver: overlay
