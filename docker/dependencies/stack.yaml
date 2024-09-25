@@ -13,11 +13,10 @@ services:
       - backend-network
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
       placement:
         constraints:
           - node.role == worker  # Ensure deployment only on worker node
-        # max_replicas_per_node: 1  # Distribute replicas across worker nodes
     ports:
       - 5432:5432
 
@@ -31,11 +30,17 @@ services:
       - backend-network
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
       placement:
         constraints:
           - node.role == worker  # Ensure deployment only on worker node
-        # max_replicas_per_node: 1  # Distribute replicas across worker nodes
+      restart_policy:
+        condition: on-failure
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "10m"
+          max-file: "3"
     ports:
       - 8088:8080
 
@@ -47,19 +52,16 @@ services:
       - backend-network
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
       placement:
         constraints:
           - node.role == worker  # Ensure deployment only on worker node
-        # max_replicas_per_node: 1
     ports:
-      - 4200:4200  # Frontend exposed on port 8085
+      - 4200:4200  # Frontend exposed on port 4200
 
 volumes:
   db-data:
 
 networks:
   backend-network:
-    driver: overlay
-  frontend-network:
     driver: overlay
